@@ -36,14 +36,12 @@ class Server {
 
     sockets() {
         this.io.on('connection', socket => {
-            console.log('Alguien se ha conectado con sockets', socket.id)
 
             socket.on('disconnect', () => {
                 console.log('Alguien se ha desconectado', socket.id)
             });
-
             socket.on('enviar-mensaje', (payload) => {
-                console.log(payload)
+                this.io.emit('enviar-mensaje', payload);
             })
         })
     }
